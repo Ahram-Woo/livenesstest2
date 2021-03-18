@@ -1,19 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mynginx
+  name: deployment-1
 spec:
-  replicas: 5
   selector:
     matchLabels:
-      run: mynginx
+      type: app  # label
+  replicas: 2
+  strategy:
+    type: Recreate
+  revisionHistoryLimit: 1  # 여러번 배포를 하더라도 하나의 replicaset만 남는다.
   template:
     metadata:
       labels:
-        run: mynginx
+        type: app  # label
     spec:
       containers:
-      - image: nginx
-        name: mynginx
-        ports:
-        - containerPort: 80
+      - name: container
+        image: kubetm/app:v1
+      terminationGracePeriodSeconds: 10
