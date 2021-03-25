@@ -22,7 +22,7 @@ spec:
         name: random-generator
         env:
         - name: DELAY_STARTUP
-          value: "20"
+          value: "40"
         ports:
         - containerPort: 8080
           protocol: TCP
